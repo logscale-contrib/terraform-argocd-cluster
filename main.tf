@@ -11,15 +11,15 @@ resource "kubernetes_secret_v1" "argocd_manager_sa" {
   data = {
     name   = var.name
     server = var.server
-    config = <<EOF
-     {
-        "bearerToken": "${var.token}",
-        "tlsClientConfig": {
-            "insecure": ${var.insecure},
-            "caData": "${var.caData}"
+    config = jsonencode(
+      {
+        bearerToken = var.token
+        tlsClientConfig = {
+          insecure = var.insecure
+          caData   = var.caData
         }
-     }
-    EOF
+      }
+    )
   }
 }
 
