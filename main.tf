@@ -1,0 +1,35 @@
+
+resource "kubernetes_secret_v1" "argocd_manager_sa" {
+  metadata {
+    name      = var.name
+    namespace = var.namespace
+    labels = {
+      "argocd.argoproj.io/secret-type" = "cluster"
+    }
+  }
+  type = "Opaque"
+  data = {
+    name   = var.name
+    server = var.server
+    config = <<EOF
+     {
+        "bearerToken": "${var.token}",
+        "tlsClientConfig": {
+            "insecure": ${var.insecure},
+            "caData": "${var.caData}"
+        }
+     }
+    EOF
+  }
+}
+
+# name: mycluster.com
+#   server: https://mycluster.com
+#   config: |
+#     {
+#       "bearerToken": "<authentication token>",
+#       "tlsClientConfig": {
+#         "insecure": false,
+#         "caData": "<base64 encoded certificate>"
+#       }
+#     }
