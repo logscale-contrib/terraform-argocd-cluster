@@ -5,6 +5,9 @@ resource "kubernetes_secret_v1" "argocd_manager_sa" {
     namespace = var.namespace
     labels = {
       "argocd.argoproj.io/secret-type" = "cluster"
+      "cloud"                          = var.label_cloud
+      "region"                         = var.label_region
+      "clusterRole"                    = var.label_cluster_role
     }
   }
   type = "Opaque"

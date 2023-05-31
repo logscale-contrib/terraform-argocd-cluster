@@ -29,3 +29,16 @@ variable "caData" {
     type = string
     description = "(optional) describe your variable"
 }
+
+variable "label_cloud" {
+    type = string
+    description = "(optional) describe your variable"
+}
+variable "label_region" {
+    type = string
+    description = "(optional) describe your variable"
+}
+variable "label_cluster_role" {
+    type = string
+    description = "(optional) describe your variable"
+}
